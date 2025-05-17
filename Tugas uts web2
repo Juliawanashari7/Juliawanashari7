@@ -1,0 +1,390 @@
+<?php
+
+use Illuminate\Support\Str;
+
+return [
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default Database Connection Name
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify which of the database connections below you wish
+    | to use as your default connection for database operations. This is
+    | the connection which will be utilized unless another connection
+    | is explicitly specified when you execute a query / statement.
+    |
+    */
+
+    'default' => env('DB_CONNECTION', 'sqlite'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Database Connections
+    |--------------------------------------------------------------------------
+    |
+    | Below are all of the database connections defined for your application.
+    | An example configuration is provided for each database system which
+    | is supported by Laravel. You're free to add / remove connections.
+    |
+    */
+
+    'connections' => [
+
+        'sqlite' => [
+            'driver' => 'sqlite',
+            'url' => env('DB_URL'),
+            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'prefix' => '',
+            'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
+            'busy_timeout' => null,
+            'journal_mode' => null,
+            'synchronous' => null,
+        ],
+
+        'mysql' => [
+            'driver' => 'mysql',
+            'url' => env('DB_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'laravel'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        // koneksi database baru uts_web2
+        'uts_web2' => [
+            'driver' => 'mysql',
+            'host' => env('DB_SECOND_HOST', '127.0.0.1'),
+            'port' => env('DB_SECOND_PORT', '3306'),
+            'database' => env('DB_SECOND_DATABASE', 'uts_web2'),
+            'username' => env('DB_SECOND_USERNAME', 'root'),
+            'password' => env('DB_SECOND_PASSWORD', ''),
+            'unix_socket' => env('DB_SECOND_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+        ],
+
+        'mariadb' => [
+            'driver' => 'mariadb',
+            'url' => env('DB_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'laravel'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => env('DB_CHARSET', 'utf8mb4'),
+            'collation' => env('DB_COLLATION', 'utf8mb4_unicode_ci'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+            ]) : [],
+        ],
+
+        'pgsql' => [
+            'driver' => 'pgsql',
+            'url' => env('DB_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => env('DB_DATABASE', 'laravel'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => env('DB_CHARSET', 'utf8'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'search_path' => 'public',
+            'sslmode' => 'prefer',
+        ],
+
+        'sqlsrv' => [
+            'driver' => 'sqlsrv',
+            'url' => env('DB_URL'),
+            'host' => env('DB_HOST', 'localhost'),
+            'port' => env('DB_PORT', '1433'),
+            'database' => env('DB_DATABASE', 'laravel'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
+            'charset' => env('DB_CHARSET', 'utf8'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            // 'encrypt' => env('DB_ENCRYPT', 'yes'),
+            // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
+        ],
+
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Migration Repository Table
+    |--------------------------------------------------------------------------
+    |
+    | This table keeps track of all the migrations that have already run for
+    | your application. Using this information, we can determine which of
+    | the migrations on disk haven't actually been run on the database.
+    |
+    */
+
+    'migrations' => [
+        'table' => 'migrations',
+        'update_date_on_publish' => true,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Redis Databases
+    |--------------------------------------------------------------------------
+    |
+    | Redis is an open source, fast, and advanced key-value store that also
+    | provides a richer body of commands than a typical key-value system
+    | such as Memcached. You may define your connection settings here.
+    |
+    */
+
+    'redis' => [
+
+        'client' => env('REDIS_CLIENT', 'phpredis'),
+
+        'options' => [
+            'cluster' => env('REDIS_CLUSTER', 'redis'),
+            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'persistent' => env('REDIS_PERSISTENT', false),
+        ],
+
+        'default' => [
+            'url' => env('REDIS_URL'),
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'username' => env('REDIS_USERNAME'),
+            'password' => env('REDIS_PASSWORD'),
+            'port' => env('REDIS_PORT', '6379'),
+            'database' => env('REDIS_DB', '0'),
+        ],
+
+        'cache' => [
+            'url' => env('REDIS_URL'),
+            'host' => env('REDIS_HOST', '127.0.0.1'),
+            'username' => env('REDIS_USERNAME'),
+            'password' => env('REDIS_PASSWORD'),
+            'port' => env('REDIS_PORT', '6379'),
+            'database' => env('REDIS_CACHE_DB', '1'),
+        ],
+
+    ],
+
+];
+2025_05_06_135147_create_posts_table.php
+
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreatePostsTable extends Migration
+{
+    /**
+     * Jalankan migrasi untuk membuat tabel posts.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();  // Membuat kolom ID sebagai primary key
+            $table->string('title');  // Kolom untuk judul
+            $table->text('content');  // Kolom untuk konten
+            $table->string('gambar')->nullable();  // Kolom untuk gambar (nullable)
+            $table->timestamps();  // Kolom created_at dan updated_at
+        });
+    }
+
+    /**
+     * Menurunkan migrasi dan menghapus tabel posts.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('posts');
+    }
+}
+
+mahasiswacontroller.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Mahasiswa;
+use Illuminate\Http\Request;
+
+class MahasiswaController extends Controller
+{
+    // Menampilkan daftar mahasiswa
+    public function index()
+    {
+        // Mengambil semua data mahasiswa dari database
+        $mahasiswas = Mahasiswa::all();
+        
+        // Menampilkan view index dan mengirim data mahasiswa
+        return view('mahasiswa.index', compact('mahasiswas'));
+    }
+
+    // Menampilkan form untuk menambahkan mahasiswa
+    public function create()
+    {
+        return view('mahasiswa.create');
+    }
+
+    // Menyimpan data mahasiswa baru
+    public function store(Request $request)
+    {
+        // Validasi data yang diterima dari formulir
+        $validatedData = $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'nim' => 'required|string|max:255|unique:mahasiswas',
+            'program_studi' => 'required|string|max:255',
+            'angkatan' => 'required|integer',
+        ]);
+
+        // Menyimpan data mahasiswa ke database
+        Mahasiswa::create($validatedData);
+
+        // Setelah data berhasil disimpan, redirect ke halaman daftar mahasiswa
+        return redirect()->route('mahasiswa.index');
+    }
+
+    // Menampilkan detail mahasiswa berdasarkan ID
+    public function show($id)
+    {
+        // Mencari mahasiswa berdasarkan ID
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        
+        // Menampilkan view detail dan mengirim data mahasiswa
+        return view('mahasiswa.show', compact('mahasiswa'));
+    }
+
+    // Menampilkan form untuk mengedit data mahasiswa
+    public function edit($id)
+    {
+        // Mencari mahasiswa berdasarkan ID
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        
+        // Menampilkan form edit dengan mengirim data mahasiswa
+        return view('mahasiswa.edit', compact('mahasiswa'));
+    }
+
+    // Mengupdate data mahasiswa yang telah ada
+    public function update(Request $request, $id)
+    {
+        // Validasi data yang diterima dari formulir
+        $validatedData = $request->validate([
+            'nama_lengkap' => 'required|string|max:255',
+            'nim' => 'required|string|max:255|unique:mahasiswas,nim,' . $id,
+            'program_studi' => 'required|string|max:255',
+            'angkatan' => 'required|integer',
+        ]);
+
+        // Mencari mahasiswa berdasarkan ID
+        $mahasiswa = Mahasiswa::findOrFail($id);
+
+        // Mengupdate data mahasiswa
+        $mahasiswa->update($validatedData);
+
+        // Setelah data berhasil diupdate, redirect ke halaman daftar mahasiswa
+        return redirect()->route('mahasiswa.index');
+    }
+
+    // Menghapus data mahasiswa
+    public function destroy($id)
+    {
+        // Mencari mahasiswa berdasarkan ID
+        $mahasiswa = Mahasiswa::findOrFail($id);
+        
+        // Menghapus data mahasiswa dari database
+        $mahasiswa->delete();
+
+        // Setelah data berhasil dihapus, redirect ke halaman daftar mahasiswa
+        return redirect()->route('mahasiswa.index');
+    }
+}
+web.php laravelll
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
+
+// Halaman awal
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/biodata', function () {
+    return view('biodata');
+});
+
+Route::get('/namasaya', function () {
+    return "levina";
+});
+
+Route::get('/matakuliah', function () {
+    return "Matakuliah : Pemrograman Web 11";
+});
+
+Route::get('/mahasiswa/{nama}', function ($nama) {
+    return "Tampilkan data mahasiswa bernama {$nama}";
+});
+
+Route::get('/stok_barang/{jenis}/{nama_barang}', function ($jenis, $nama_barang) {
+    return "Cek sisa stok untuk {$jenis} {$nama_barang}";
+});
+
+Route::get('/stok_barang/{jenis?}/{nama_barang?}', function ($jenis = 'smartphone', $nama_barang = 'samsung') {
+    return "Cek sisa stok untuk {$jenis} {$nama_barang}";
+});
+
+
+// Routing user dengan validasi ID
+Route::get('/user/{id}', function ($id) {
+    return "Tampilkan user dengan id {$id}";
+})->where('id', '^[A-Za-z]{2}[0-9]+$');
+
+
+Route::resource('posts', PostController::class);
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
+Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+
+use App\Http\Controllers\MahasiswaController;
+
+// Route yang static (pasti) DITULIS LEBIH DULU
+Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
+Route::get('/mahasiswa/create', [MahasiswaController::class, 'create'])->name('mahasiswa.create');
+Route::post('/mahasiswa', [MahasiswaController::class, 'store'])->name('mahasiswa.store');
+Route::get('/mahasiswa/{id}/edit', [MahasiswaController::class, 'edit'])->name('mahasiswa.edit');
+Route::put('/mahasiswa/{id}', [MahasiswaController::class, 'update'])->name('mahasiswa.update');
+Route::delete('/mahasiswa/{id}', [MahasiswaController::class, 'destroy'])->name('mahasiswa.destroy');
+
+// Route dynamic HARUS PALING BAWAH
+Route::get('/mahasiswa/{id}', [MahasiswaController::class, 'show'])->name('mahasiswa.show');
